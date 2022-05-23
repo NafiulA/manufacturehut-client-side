@@ -12,7 +12,7 @@ const Header = () => {
         </>
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 fixed z-50">
             <div className="navbar-start">
                 <Link to="/" className="text-xl font-semibold pl-5">ManufactureHut</Link>
             </div>
