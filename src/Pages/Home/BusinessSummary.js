@@ -8,7 +8,7 @@ const BusinessSummary = () => {
     return (
         <div className='my-8'>
             <h3 className='p-2 text-2xl text-center'>Our Professional team works to increase productivity and cost effectiveness on the market</h3>
-            <div className='w-3/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-content-center items-center my-3'>
+            <div className='w-3/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-content-center items-center my-5 shadow-xl rounded-lg'>
                 <div className='flex flex-col justify-center items-center p-5'>
                     <img src={calender} alt="" />
                     <div className='text-center pt-2'>
@@ -19,7 +19,7 @@ const BusinessSummary = () => {
                 <div className='flex flex-col justify-center items-center p-5'>
                     <img src={parts} alt="" />
                     <div className='text-center pt-2'>
-                        <p className='text-accent text-3xl'>5 million+</p>
+                        <p className='text-accent text-3xl'>1 million+</p>
                         <p className='text-lg'>parts exported</p>
                     </div>
                 </div>
