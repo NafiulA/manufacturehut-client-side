@@ -33,12 +33,13 @@ const Order = () => {
         const body = {
             productId: product._id,
             name: product.name,
-            userName: data.name,
-            userEmail: data.email,
+            userName: user.displayName,
+            userEmail: user.email,
             quantity: quantity,
             price: product.price * data.quantity,
             phone: data.phone,
-            address: data.address
+            address: data.address,
+            payment: "unpaid"
         };
         fetch('http://localhost:5000/order', {
             method: "POST",
