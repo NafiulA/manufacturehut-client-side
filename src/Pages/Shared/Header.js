@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
     const [user] = useAuthState(auth);
@@ -13,12 +15,12 @@ const Header = () => {
     const menu =
         <>
             <li> <Link to="/">Home</Link></li>
-            <li> <Link to="/dashboard">Dashboard</Link></li>
+            {user && <li> <Link to="/dashboard">Dashboard</Link></li>}
             <li> <Link to="/blogs">Blogs</Link></li>
             <li> <Link to="/portfolio">My Portfolio</Link></li>
-            {user ? <button onClick={handleLogout} className='btn btn-ghost'>Log Out</button> : <li> <Link to="/login">Login</Link></li>}
+            {user ? <button onClick={handleLogout} className='btn btn-accent'><p className='pr-2'>{user?.displayName}</p>
+                <FontAwesomeIcon icon={faPowerOff}></FontAwesomeIcon></button> : <li> <Link to="/login">Login</Link></li>}
         </>
-
     return (
         <div className="navbar bg-base-100 z-50">
             <div className="navbar-start">

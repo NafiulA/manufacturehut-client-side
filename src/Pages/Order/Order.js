@@ -20,20 +20,31 @@ const Order = () => {
         if (errors?.quantity) {
             toast.error(`${errors.quantity.message}`, { id: "stockError" });
         }
+        if (errors?.phone) {
+            toast.error(`${errors.phone.message}`, { id: "phoneError" });
+        }
+        if (errors?.address) {
+
+            toast.error(`${errors.address.message}`, { id: "addressError" })
+        }
     }
     const onSubmit = data => {
         const quantity = data.quantity;
         const body = {
             productId: product._id,
             name: product.name,
-            userEmail: user.email,
+            userName: data.name,
+            userEmail: data.email,
             quantity: quantity,
-            price: product.price * data.quantity
+            price: product.price * data.quantity,
+            phone: data.phone,
+            address: data.address
         };
         fetch('http://localhost:5000/order', {
             method: "POST",
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`
             },
             body: JSON.stringify(body)
         })
@@ -42,12 +53,14 @@ const Order = () => {
                     fetch(`http://localhost:5000/updateQuantity/${product._id}?quantity=${quantity}`, {
                         method: "PUT",
                         headers: {
-                            "Content-type": "application/json"
+                            "Content-type": "application/json",
+                            authorization: `Bearer ${localStorage.getItem("accessToken")}`
                         }
                     })
                         .then(res => res.json())
                         .then(data => {
                             if (data.modifiedCount) {
+                                toast.success("Order Successful", { id: "orderSuccess" })
                                 refetch();
                             }
                         })
@@ -73,11 +86,20 @@ const Order = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control w-full max-w-sm">
                             <label className="label">
+                                <span className="label-text text-xl">Name</span>
+                            </label>
+                            <input {...register("name")} type="text" disabled defaultValue={`${user.displayName}`} className="input input-bordered w-full max-w-sm" />
+                            <label className="label">
+                                <span className="label-text text-xl">Email</span>
+                            </label>
+                            <input {...register("email"
+                            )} type="email" defaultValue={`${user.email}`} disabled className="input input-bordered w-full max-w-sm" />
+                            <label className="label">
                                 <span className="label-text text-xl">Order Quantity</span>
                             </label>
                             <input {...register("quantity", {
                                 valueAsNumber: true,
-                                required: "Order quantity in required", min: {
+                                required: "Order quantity is required", min: {
                                     value: `${product.minPurchase}`,
                                     message: "Minimum purchase amount required"
                                 }, max: {
@@ -85,7 +107,20 @@ const Order = () => {
                                     message: "Stock not available"
                                 }
                             })} type="number" defaultValue={`${product.minPurchase}`} className="input input-bordered w-full max-w-sm" />
-                            <input type="submit" value="Order" className="my-5 btn btn-accent w-full max-w-xs" />
+                            <label className="label">
+                                <span className="label-text text-xl">Phone</span>
+                            </label>
+                            <input {...register("phone", {
+                                valueAsNumber: true,
+                                required: "Phone number is required"
+                            })} type="number" className="input input-bordered w-full max-w-sm" />
+                            <label className="label">
+                                <span className="label-text text-xl">Address</span>
+                            </label>
+                            <input {...register("address", {
+                                required: "Address is required"
+                            })} type="text" className="input input-bordered w-full max-w-sm" />
+                            <input type="submit" value="Order" disabled={errors?.quantity} className="my-5 btn btn-accent w-full max-w-xs" />
                         </div>
                     </form>
                 </div>
