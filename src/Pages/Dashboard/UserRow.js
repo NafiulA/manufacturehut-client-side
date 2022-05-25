@@ -5,7 +5,7 @@ import auth from '../../firebase.init';
 
 const UserRow = ({ index, user, refetch }) => {
     const handleMakeAdmin = (email) => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://radiant-journey-27720.herokuapp.com/user/admin/${email}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

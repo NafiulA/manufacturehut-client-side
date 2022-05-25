@@ -10,7 +10,7 @@ const ProductRow = ({ product, setDeleteProduct }) => {
             <td>{product.stock}</td>
             <td>{product.price}</td>
             <td>
-                <label onClick={() => { setDeleteProduct(product) }} for="productDeleteModal" class="btn btn-xs btn-secondary">Delete</label>
+                <label onClick={() => { setDeleteProduct(product) }} htmlFor="productDeleteModal" className="btn btn-xs btn-secondary">Delete</label>
             </td>
         </tr>
     );

@@ -2,6 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './Pages/Authentication/Login';
+import RequireAdmin from './Pages/Authentication/RequireAdmin';
 import RequireAuth from './Pages/Authentication/RequireAuth';
 import Signup from './Pages/Authentication/Signup';
 import Blogs from './Pages/Blogs/Blogs';
@@ -33,10 +34,10 @@ function App() {
           <Route path='myorders' element={<Myorders></Myorders>}></Route>
           <Route path='checkout/:id' element={<Checkout></Checkout>}></Route>
           <Route path='addreview' element={<Addreview></Addreview>}></Route>
-          <Route path='manageorders' element={<Manageorders></Manageorders>}></Route>
-          <Route path='addproduct' element={<Addproduct></Addproduct>}></Route>
-          <Route path='makeadmin' element={<MakeAdmin></MakeAdmin>}></Route>
-          <Route path='manageproducts' element={<Manageproducts></Manageproducts>}></Route>
+          <Route path='manageorders' element={<RequireAdmin><Manageorders></Manageorders></RequireAdmin>}></Route>
+          <Route path='addproduct' element={<RequireAdmin><Addproduct></Addproduct></RequireAdmin>}></Route>
+          <Route path='makeadmin' element={<RequireAdmin><MakeAdmin></MakeAdmin></RequireAdmin>}></Route>
+          <Route path='manageproducts' element={<RequireAdmin><Manageproducts></Manageproducts></RequireAdmin>}></Route>
         </Route>
         <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='/portfolio' element={<Portfolio></Portfolio>}></Route>

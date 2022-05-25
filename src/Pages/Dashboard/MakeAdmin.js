@@ -4,7 +4,7 @@ import Loading from '../Shared/Loading';
 import UserRow from './UserRow';
 
 const MakeAdmin = () => {
-    const { data: users, isLoading, refetch } = useQuery("alluser", () => fetch("http://localhost:5000/user", {
+    const { data: users, isLoading, refetch } = useQuery("alluser", () => fetch("https://radiant-journey-27720.herokuapp.com/user", {
         method: "GET",
         headers: {
             "Content-type": "application/json",
@@ -18,8 +18,8 @@ const MakeAdmin = () => {
     }
 
     return (
-        <div class="overflow-x-auto">
-            <table class="table w-full">
+        <div className="overflow-x-auto">
+            <table className="table w-full">
                 <thead>
                     <tr>
                         <th>#</th>

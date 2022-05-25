@@ -4,8 +4,8 @@ import React from 'react';
 
 const ReviewCard = ({ review }) => {
     return (
-        <div class="card w-full bg-base-100 shadow-xl">
-            <div class="card-body">
+        <div className="card w-full bg-base-100 shadow-xl">
+            <div className="card-body">
                 <p className='text-lg'>{review.review}</p>
                 <div className='flex items-center'>
                     <span className='text-lg'>{review.rating}</span>

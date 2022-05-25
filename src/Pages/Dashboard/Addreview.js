@@ -1,3 +1,4 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -24,7 +25,7 @@ const Addreview = () => {
             review: data.review,
             rating: data.rating
         };
-        fetch('http://localhost:5000/review', {
+        fetch('https://radiant-journey-27720.herokuapp.com/review', {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
@@ -32,7 +33,14 @@ const Addreview = () => {
             },
             body: JSON.stringify(body)
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403 || res.status === 401) {
+                    toast.success(`${res?.message}`, { id: "adminError" })
+                    signOut(auth);
+                    localStorage.removeItem("accessToken");
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.insertedId) {
                     reset();
@@ -51,10 +59,10 @@ const Addreview = () => {
                     <input {...register("review", {
                         required: "Review description is required"
                     })} type="text" className="input input-bordered w-full max-w-sm" />
-                    <label class="label">
-                        <span class="label-text">Give a rating from 1 to 5</span>
+                    <label className="label">
+                        <span className="label-text">Give a rating from 1 to 5</span>
                     </label>
-                    <select {...register("rating", { required: "Rating is required" })} class="select select-bordered w-full max-w-sm">
+                    <select {...register("rating", { required: "Rating is required" })} className="select select-bordered w-full max-w-sm">
                         <option value={1}>1</option>
                         <option value={2}>2</option>
                         <option value={3}>3</option>

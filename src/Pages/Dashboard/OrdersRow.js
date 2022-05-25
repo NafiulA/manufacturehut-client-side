@@ -1,17 +1,26 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import toast from 'react-hot-toast';
+import auth from '../../firebase.init';
 
 const OrdersRow = ({ index, order, refetch }) => {
 
     const handleShipment = id => {
-        fetch(`http://localhost:5000/ship/${id}`, {
+        fetch(`https://radiant-journey-27720.herokuapp.com/ship/${id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403 || res.status === 401) {
+                    toast.success(`${res?.message}`, { id: "adminError" })
+                    signOut(auth);
+                    localStorage.removeItem("accessToken");
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.modifiedCount) {
                     refetch();

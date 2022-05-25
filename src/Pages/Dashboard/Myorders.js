@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
 import MyOrderRow from './MyOrderRow';
+import OrderCancelModal from './OrderCancelModal';
 
 const Myorders = () => {
     const [user] = useAuthState(auth);
-    const { data: orders, isLoading, refetch } = useQuery("myorders", () => fetch(`http://localhost:5000/myorder/${user.email}`, {
+    const [orderCancel, setOrderCancel] = useState(null);
+    const { data: orders, isLoading, refetch } = useQuery("myorders", () => fetch(`https://radiant-journey-27720.herokuapp.com/myorder/${user.email}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json",
@@ -19,8 +21,8 @@ const Myorders = () => {
         return <Loading></Loading>
     }
     return (
-        <div class="overflow-x-auto">
-            <table class="table w-full">
+        <div className="overflow-x-auto">
+            <table className="table w-full">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -35,10 +37,13 @@ const Myorders = () => {
                     {orders.map((order, index) => <MyOrderRow key={order._id}
                         order={order}
                         index={index}
-                        refetch={refetch}
+                        setOrderCancel={setOrderCancel}
                     ></MyOrderRow>)}
                 </tbody>
             </table>
+            {orderCancel && <OrderCancelModal setOrderCancel={setOrderCancel}
+                orderCancel={orderCancel}
+                refetch={refetch}></OrderCancelModal>}
         </div>
     );
 };

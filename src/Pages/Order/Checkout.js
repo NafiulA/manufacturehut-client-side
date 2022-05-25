@@ -10,7 +10,7 @@ const stripePromise = loadStripe('pk_test_51L2upaH7CX4NnBUMD0AUdwkFl2PPFvm0gkTSg
 
 const Checkout = () => {
     const { id } = useParams();
-    const { data: order, isLoading } = useQuery(["order", id], () => fetch(`http://localhost:5000/order/${id}`, {
+    const { data: order, isLoading } = useQuery(["order", id], () => fetch(`https://radiant-journey-27720.herokuapp.com/order/${id}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json",

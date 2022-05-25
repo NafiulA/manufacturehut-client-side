@@ -12,7 +12,7 @@ const CheckoutForm = ({ order }) => {
     const [clientSecret, setClientSecret] = useState();
     const { _id, userName, userEmail } = order;
     useEffect(() => {
-        fetch("http://localhost:5000/createPaymentIntent", {
+        fetch("https://radiant-journey-27720.herokuapp.com/createPaymentIntent", {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
@@ -63,7 +63,7 @@ const CheckoutForm = ({ order }) => {
             toast.error(`${intentError.message}`, { id: "intentError" });
         }
         else {
-            fetch(`http://localhost:5000/order/${_id}`, {
+            fetch(`https://radiant-journey-27720.herokuapp.com/order/${_id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",

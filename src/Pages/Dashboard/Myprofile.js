@@ -1,3 +1,4 @@
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -10,7 +11,7 @@ const Myprofile = () => {
     const [storedData, setStoredData] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5000/user/${user.email}`, {
+        fetch(`https://radiant-journey-27720.herokuapp.com/user/${user.email}`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
@@ -46,7 +47,7 @@ const Myprofile = () => {
             phone: data.phone,
             linkedin: data.linkedin
         }
-        fetch(`http://localhost:5000/profile/${user.email}`, {
+        fetch(`https://radiant-journey-27720.herokuapp.com/profile/${user.email}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",
@@ -54,7 +55,14 @@ const Myprofile = () => {
             },
             body: JSON.stringify(body)
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403 || res.status === 401) {
+                    toast.success(`${res?.message}`, { id: "adminError" })
+                    signOut(auth);
+                    localStorage.removeItem("accessToken");
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.modifiedCount) {
                     toast("Profile updated", { id: "profile" });

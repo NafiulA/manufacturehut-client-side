@@ -1,6 +1,8 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import auth from '../../firebase.init';
 
 const Addproduct = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -37,7 +39,7 @@ const Addproduct = () => {
             img: data.img
         }
 
-        fetch('http://localhost:5000/product', {
+        fetch('https://radiant-journey-27720.herokuapp.com/product', {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
@@ -45,7 +47,14 @@ const Addproduct = () => {
             },
             body: JSON.stringify(body)
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403 || res.status === 401) {
+                    toast.success(`${res?.message}`, { id: "adminError" })
+                    signOut(auth);
+                    localStorage.removeItem("accessToken");
+                }
+                return res.json()
+            })
             .then(data => {
                 if (data.insertedId) {
                     reset();
@@ -56,56 +65,56 @@ const Addproduct = () => {
     return (
         <div className='p-5'>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div class="form-control w-full max-w-sm">
-                    <label class="label">
-                        <span class="label-text text-lg">Product Name:</span>
+                <div className="form-control w-full max-w-sm">
+                    <label className="label">
+                        <span className="label-text text-lg">Product Name:</span>
                     </label>
                     <input {...register("name", {
                         required: "Product name is required"
-                    })} type="text" placeholder="Product Name" class="input input-bordered w-full max-w-sm" />
+                    })} type="text" placeholder="Product Name" className="input input-bordered w-full max-w-sm" />
                 </div>
-                <div class="form-control w-full max-w-sm">
-                    <label class="label">
-                        <span class="label-text text-lg">Product Description:</span>
+                <div className="form-control w-full max-w-sm">
+                    <label className="label">
+                        <span className="label-text text-lg">Product Description:</span>
                     </label>
                     <input {...register("description", {
                         required: "Product description is required"
-                    })} type="text" placeholder="Product description" class="input input-bordered w-full max-w-sm" />
+                    })} type="text" placeholder="Product description" className="input input-bordered w-full max-w-sm" />
                 </div>
-                <div class="form-control w-full max-w-sm">
-                    <label class="label">
-                        <span class="label-text text-lg">Product Price/unit:</span>
+                <div className="form-control w-full max-w-sm">
+                    <label className="label">
+                        <span className="label-text text-lg">Product Price/unit:</span>
                     </label>
                     <input {...register("price", {
                         valueAsNumber: true,
                         required: "Price is required"
-                    })} type="number" placeholder="Price/unit" class="input input-bordered w-full max-w-sm" />
+                    })} type="number" placeholder="Price/unit" className="input input-bordered w-full max-w-sm" />
                 </div>
-                <div class="form-control w-full max-w-sm">
-                    <label class="label">
-                        <span class="label-text text-lg">Product Stock:</span>
+                <div className="form-control w-full max-w-sm">
+                    <label className="label">
+                        <span className="label-text text-lg">Product Stock:</span>
                     </label>
                     <input {...register("stock", {
                         valueAsNumber: true,
                         required: "Stock amount is required"
-                    })} type="number" placeholder="Product Stock" class="input input-bordered w-full max-w-sm" />
+                    })} type="number" placeholder="Product Stock" className="input input-bordered w-full max-w-sm" />
                 </div>
-                <div class="form-control w-full max-w-sm">
-                    <label class="label">
-                        <span class="label-text text-lg">Min Purchase Amount:</span>
+                <div className="form-control w-full max-w-sm">
+                    <label className="label">
+                        <span className="label-text text-lg">Min Purchase Amount:</span>
                     </label>
                     <input {...register("minPurchase", {
                         valueAsNumber: true,
                         required: "Min purchase amount is required is required"
-                    })} type="number" placeholder="Min purchase amount" class="input input-bordered w-full max-w-sm" />
+                    })} type="number" placeholder="Min purchase amount" className="input input-bordered w-full max-w-sm" />
                 </div>
-                <div class="form-control w-full max-w-sm">
-                    <label class="label">
-                        <span class="label-text text-lg">Image</span>
+                <div className="form-control w-full max-w-sm">
+                    <label className="label">
+                        <span className="label-text text-lg">Image</span>
                     </label>
-                    <input {...register("img", { required: "Image is required" })} type="url" class="input input-bordered w-full max-w-sm" />
+                    <input {...register("img", { required: "Image is required" })} type="url" className="input input-bordered w-full max-w-sm" />
                 </div>
-                <input type="submit" value="Add Product" class="input input-bordered w-full max-w-xs" />
+                <input type="submit" value="Add Product" className="input input-bordered w-full max-w-xs" />
             </form>
         </div>
     );

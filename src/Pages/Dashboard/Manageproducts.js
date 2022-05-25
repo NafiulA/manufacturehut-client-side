@@ -6,13 +6,13 @@ import ProductRow from './ProductRow';
 
 const Manageproducts = () => {
     const [deleteProduct, setDeleteProduct] = useState(null);
-    const { data: products, isLoading, refetch } = useQuery("products", () => fetch("http://localhost:5000/products").then(res => res.json()));
+    const { data: products, isLoading, refetch } = useQuery("products", () => fetch("https://radiant-journey-27720.herokuapp.com/products").then(res => res.json()));
     if (isLoading) {
         return <Loading></Loading>
     }
     return (
-        <div class="overflow-x-auto">
-            <table class="table w-full">
+        <div className="overflow-x-auto">
+            <table className="table w-full">
                 <thead>
                     <tr>
                         <th>Img</th>

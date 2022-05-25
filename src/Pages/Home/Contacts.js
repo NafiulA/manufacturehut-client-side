@@ -7,8 +7,8 @@ const Contacts = () => {
     const position = [40.6759269625971, -73.97181630134584
     ];
     return (
-        <div id='contact' class="hero min-h-screen bg-base-100">
-            <div class="hero-content flex-col lg:flex-row-reverse">
+        <div id='contact' className="hero min-h-screen bg-base-100">
+            <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className='mx-auto py-2' style={{ width: "80%", height: "80%" }}>
                     <MapContainer center={position} zoom={16} scrollWheelZoom={true}>
                         <TileLayer
@@ -23,8 +23,8 @@ const Contacts = () => {
                     </MapContainer>
                 </div>
                 <div>
-                    <h1 class="text-5xl font-bold">Office Contacts</h1>
-                    <p class="py-6">Our products have obtained certificates issued by quality inspection of various agencies. Our products are sold to various countries around the world and look forward to working with you.</p>
+                    <h1 className="text-5xl font-bold">Office Contacts</h1>
+                    <p className="py-6">Our products have obtained certificates issued by quality inspection of various agencies. Our products are sold to various countries around the world and look forward to working with you.</p>
                     <div className='flex items-center py-2'>
                         <FontAwesomeIcon icon={faLocation}></FontAwesomeIcon>
                         <div className='pl-3'>
