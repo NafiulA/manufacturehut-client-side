@@ -1,6 +1,8 @@
 import React from 'react';
+import Footer from '../Shared/Footer';
 import Education from './Education';
 import PortfolioHero from './PortfolioHero';
+import Projects from './Projects';
 import Skills from './Skills';
 
 const Portfolio = () => {
@@ -9,6 +11,8 @@ const Portfolio = () => {
             <PortfolioHero></PortfolioHero>
             <Education></Education>
             <Skills></Skills>
+            <Projects></Projects>
+            <Footer></Footer>
         </div>
     );
 };
