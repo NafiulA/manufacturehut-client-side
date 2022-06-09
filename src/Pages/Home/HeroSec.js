@@ -4,7 +4,7 @@ import background from "../../assets/images/background.jpg";
 
 const HeroSec = () => {
     return (
-        <div className="hero min-h-screen" style={{ "backgroundImage": `url(${background})` }}>
+        <div className="hero min-h-[94vh]" style={{ "backgroundImage": `url(${background})` }}>
             <div className="hero-overlay bg-opacity-80"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="lg:w-full w-md">
