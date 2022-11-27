@@ -24,4 +24,5 @@ It's a manufacturer website where people can buy products in lot from the manuda
 * firebase
 * heroku
 
+### Server-side git: https://github.com/NafiulA/manufacturehut-server-side
 ## Live Link: https://manufacturehut.web.app/
