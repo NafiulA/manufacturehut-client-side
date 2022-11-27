@@ -107,7 +107,7 @@ const Login = () => {
                         </div>
                         <input type="submit" className="btn btn-accent w-full max-w-xs" value="Login" />
                     </form>
-                    <p className='text-center text-sm'>New to Doctors-portal? <span
+                    <p className='text-center text-sm'>New to ManufactureHut? <span
                         onClick={() => { navigate("/signup") }} className='text-accent cursor-pointer'>
                         Create new account</span></p>
                     <div className="divider">OR</div>

@@ -6,7 +6,7 @@ import auth from '../../firebase.init';
 const OrdersRow = ({ index, order, refetch }) => {
 
     const handleShipment = id => {
-        fetch(`https://radiant-journey-27720.herokuapp.com/ship/${id}`, {
+        fetch(`https://manufacturehut.onrender.com/ship/${id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

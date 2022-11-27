@@ -10,7 +10,7 @@ import Loading from '../Shared/Loading';
 const Order = () => {
     const { id } = useParams();
     const [user] = useAuthState(auth);
-    const { data: product, isLoading, refetch } = useQuery("productData", () => fetch(`https://radiant-journey-27720.herokuapp.com/product/${id}`).then(res => res.json()));
+    const { data: product, isLoading, refetch } = useQuery("productData", () => fetch(`https://manufacturehut.onrender.com/product/${id}`).then(res => res.json()));
     const { register, handleSubmit, formState: { errors } } = useForm();
     if (isLoading) {
         return <Loading></Loading>
@@ -41,7 +41,7 @@ const Order = () => {
             address: data.address,
             payment: "unpaid"
         };
-        fetch('https://radiant-journey-27720.herokuapp.com/order', {
+        fetch('https://manufacturehut.onrender.com/order', {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
@@ -51,7 +51,7 @@ const Order = () => {
         })
             .then(res => res.json()).then(data => {
                 if (data.insertedId) {
-                    fetch(`https://radiant-journey-27720.herokuapp.com/updateQuantity/${product._id}?quantity=${quantity}`, {
+                    fetch(`https://manufacturehut.onrender.com/updateQuantity/${product._id}?quantity=${quantity}`, {
                         method: "PUT",
                         headers: {
                             "Content-type": "application/json",

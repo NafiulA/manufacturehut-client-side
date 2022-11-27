@@ -7,7 +7,7 @@ const Reviews = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch("https://radiant-journey-27720.herokuapp.com/review")
+        fetch("https://manufacturehut.onrender.com/review")
             .then(res => res.json())
             .then(data => {
                 setReviews(data.reverse());

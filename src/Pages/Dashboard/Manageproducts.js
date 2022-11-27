@@ -6,7 +6,7 @@ import ProductRow from './ProductRow';
 
 const Manageproducts = () => {
     const [deleteProduct, setDeleteProduct] = useState(null);
-    const { data: products, isLoading, refetch } = useQuery("products", () => fetch("https://radiant-journey-27720.herokuapp.com/products").then(res => res.json()));
+    const { data: products, isLoading, refetch } = useQuery("products", () => fetch("https://manufacturehut.onrender.com/products").then(res => res.json()));
     if (isLoading) {
         return <Loading></Loading>
     }

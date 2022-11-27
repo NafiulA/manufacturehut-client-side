@@ -11,7 +11,7 @@ const Myprofile = () => {
     const [storedData, setStoredData] = useState({});
 
     useEffect(() => {
-        fetch(`https://radiant-journey-27720.herokuapp.com/user/${user.email}`, {
+        fetch(`https://manufacturehut.onrender.com/user/${user.email}`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",
@@ -47,7 +47,7 @@ const Myprofile = () => {
             phone: data.phone,
             linkedin: data.linkedin
         }
-        fetch(`https://radiant-journey-27720.herokuapp.com/profile/${user.email}`, {
+        fetch(`https://manufacturehut.onrender.com/profile/${user.email}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json",

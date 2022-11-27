@@ -25,7 +25,7 @@ const Addreview = () => {
             review: data.review,
             rating: data.rating
         };
-        fetch('https://radiant-journey-27720.herokuapp.com/review', {
+        fetch('https://manufacturehut.onrender.com/review', {
             method: "POST",
             headers: {
                 "Content-type": "application/json",

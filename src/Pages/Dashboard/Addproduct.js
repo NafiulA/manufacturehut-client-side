@@ -39,7 +39,7 @@ const Addproduct = () => {
             img: data.img
         }
 
-        fetch('https://radiant-journey-27720.herokuapp.com/product', {
+        fetch('https://manufacturehut.onrender.com/product', {
             method: "POST",
             headers: {
                 "Content-type": "application/json",

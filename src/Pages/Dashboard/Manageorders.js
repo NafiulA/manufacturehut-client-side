@@ -7,7 +7,7 @@ import Loading from '../Shared/Loading';
 import OrdersRow from './OrdersRow';
 
 const Manageorders = () => {
-    const { data: orders, isLoading, refetch } = useQuery("allorders", () => fetch("https://radiant-journey-27720.herokuapp.com/order", {
+    const { data: orders, isLoading, refetch } = useQuery("allorders", () => fetch("https://manufacturehut.onrender.com/order", {
         method: "GET",
         headers: {
             "Content-type": "application/json",

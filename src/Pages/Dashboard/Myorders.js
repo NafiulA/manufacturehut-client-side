@@ -9,7 +9,7 @@ import OrderCancelModal from './OrderCancelModal';
 const Myorders = () => {
     const [user] = useAuthState(auth);
     const [orderCancel, setOrderCancel] = useState(null);
-    const { data: orders, isLoading, refetch } = useQuery("myorders", () => fetch(`https://radiant-journey-27720.herokuapp.com/myorder/${user.email}`, {
+    const { data: orders, isLoading, refetch } = useQuery("myorders", () => fetch(`https://manufacturehut.onrender.com/myorder/${user.email}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json",

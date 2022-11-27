@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 const OrderCancelModal = ({ orderCancel, setOrderCancel, refetch }) => {
     const handleCancel = id => {
-        fetch(`https://radiant-journey-27720.herokuapp.com/order/${id}`, {
+        fetch(`https://manufacturehut.onrender.com/order/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-type": "application/json",
